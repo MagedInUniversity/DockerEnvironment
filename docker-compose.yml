@@ -8,7 +8,7 @@ services:
       - "443:443"
     restart: always
     volumes:
-      - ./www/:/var/www/
+      - ./www/:/var/www/html
       - ./conf/nginx/ssl:/etc/ssl/local/
       - ./conf/nginx/sites/includes:/etc/nginx/includes
       - ./conf/nginx/sites/conf.d:/etc/nginx/conf.d
@@ -21,10 +21,10 @@ services:
     build:
       context: .
       dockerfile: ./builders/PHP/5.6-fpm
-    container_name: php56
+    container_name: php
     restart: always
     volumes:
-      - ./www/:/var/www/
+      - ./www/:/var/www/html
       - ./conf/php/5.6/mods-available:/usr/local/etc/php/conf.d
       - ./conf/php/fpm/php-fpm.d:/usr/local/etc/php-fpm.d
       - ./storage/logs/php-fpm/5.6:/var/log/php-fpm
