@@ -1,0 +1,53 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - ./www/:/var/www/
+      - ./conf/nginx/ssl:/etc/ssl/local/
+      - ./conf/nginx/sites/includes:/etc/nginx/includes
+      - ./conf/nginx/sites/conf.d:/etc/nginx/conf.d
+      - ./storage/logs/supervisor:/var/log/supervisor
+      - ./storage/logs/nginx:/var/log/nginx
+    networks:
+      - backend
+
+  php:
+    build:
+      context: .
+      dockerfile: ./builders/PHP/5.6-fpm
+    container_name: php56
+    restart: always
+    volumes:
+      - ./www/:/var/www/
+      - ./conf/php/5.6/mods-available:/usr/local/etc/php/conf.d
+      - ./conf/php/fpm/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ./storage/logs/php-fpm/5.6:/var/log/php-fpm
+    networks:
+      - backend
+
+  percona:
+    image: percona:latest
+    container_name: percona
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: percona
+      MYSQL_PASSWORD: percona
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/tiagosampaio/docker/percona/data:/var/lib/mysql
+      - ./storage/dumps:/var/dumps
+      # - ./conf/percona/conf.d:/etc/mysql/percona-server.conf.d
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
