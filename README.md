@@ -24,13 +24,29 @@ $ docker-compose up -d
 ## Enter container
 Enter in specific container
 ```sh
-$ docker exec -ti nginx /bin/bash
+$ docker exec -ti [container name] /bin/bash
 ```
 
-## Rebuild Container
-Stop docker containers then rebuild them
+## Build Containers
+Simply build containers
+```sh
+$ docker-compose build
+```
+
+Build containers and set them up to get them running in background
 ```sh
 $ docker-compose up -d --build
+```
+
+## Restart Containers
+Restart all containers at once
+```sh
+$ docker-compose restart
+```
+
+Restart one or more specific containers
+```sh
+$ docker-compose restart [container name] [container name] ...
 ```
 
 ## Customizations
