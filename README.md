@@ -1,7 +1,7 @@
 # **MagedIn Docker Environment**
 > This stack container the following services: Nginx, MySQL and PHP-FPM.
 
-[![Build Status](https://travis-ci.org/magedin-university/docker-environment)](https://travis-ci.org/magedin-university/docker-environment)
+[![Build Status](https://travis-ci.org/magedin-university/docker-environment.svg?branch=master)](https://travis-ci.org/magedin-university/docker-environment)
 
 PHP Dockerized gives you everything you need for developing PHP applications locally. The idea came from the need of having an OS-agnostic and virtualized alternative to the great [MNPP](https://github.com/jyr/MNPP) stack as regular LAMP stacks quite simply can't keep up with the Nginx + PHP-FPM/HHVM combo in terms of performance. I hope you'll find it as useful an addition to your dev-arsenal as I've found it!
 
